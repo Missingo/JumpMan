@@ -14,11 +14,15 @@ namespace Game1
 
         public Entities.Man Man;
         public List<Entities.Ball> Balls;
+        public List<Entities.Coin> Coins;
         public Texture2D background;
         public Texture2D gameover;
+        public SpriteFont Font;
         public bool gameOver = false;
-        public double ballCounter = 0;
-        public int ballTimer = 5000;
+        public double ballCounter = 3000, coinCounter = 0;
+        public int ballTimer = 3000, coinTimer = 1000;
+        public int score = 0;
+
 
         public Game1()
         {
@@ -59,6 +63,7 @@ namespace Game1
             Statics.SPRITEBATCH = spriteBatch;
             background = Statics.CONTENT.Load<Texture2D>("Textures/background2x");
             gameover = Statics.CONTENT.Load<Texture2D>("Textures/gameover");
+            Font = Statics.CONTENT.Load<SpriteFont>("Fonts/fontx");
             Statics.PIXEL = Content.Load<Texture2D>("Textures/pixel");
 
             Reset();
@@ -69,6 +74,10 @@ namespace Game1
         {
             Man = new Entities.Man();
             Balls = new List<Entities.Ball>();
+            Coins = new List<Entities.Coin>();
+            ballCounter = 3000;
+            coinCounter = 0;
+            score = 0;        
         }
 
         
@@ -84,31 +93,62 @@ namespace Game1
             Statics.INPUT.Update();
 
 
-            ballCreator();
+            
             if (!gameOver)
             {                
                 foreach (Entities.Ball Ball in Balls)
                 {
                     Ball.Update();
                 }
-                Man.Update();
-            }
-            foreach (Entities.Ball Ball in Balls)
-            {
-                if (Man.Bound.Intersects(Ball.Bound))
+                foreach (Entities.Coin Coin in Coins)
                 {
-                    gameOver = true;
+                    Coin.Update();
+                }
+                Man.Update();
+                if (Man.airborn)
+                {
+                    if (Balls.Count <= 10)
+                        ballCreator();
+                    coinCreator();
                 }
             }
+            
+            foreach (Entities.Ball Ball in Balls)
+            {
+                if (Man.Bound.Intersects(Ball.Bound) && Ball.live)
+                {
+                    gameOver = true;
+                }               
+            }
+
+            for (int i = Coins.Count-1; i >= 0; i--)
+            {
+                if (Man.Bound.Intersects(Coins[i].Bound))
+                {
+                    Coins.RemoveAt(i);
+                    score++;
+                }
+                else if (Coins[i].position.Y >= 600)
+                {
+                    Coins.RemoveAt(i);
+                }
+            }
+
+           if (Man.position.Y >= 650 && Man.airborn)
+            {
+                gameOver = true;
+            }            
 
             if (Statics.INPUT.isKeyPressed(Keys.R))
             {
                 gameOver = false;
                 Reset();
             }
+            
+            
 
 
-            // TODO: Add your update logic here
+            
 
             base.Update(gameTime);
         }
@@ -121,6 +161,16 @@ namespace Game1
             {
                 Balls.Add(new Entities.Ball());
                 ballCounter = 0;
+            }
+        }
+
+        public void coinCreator()
+        {
+            coinCounter += Statics.GAMETIME.ElapsedGameTime.TotalMilliseconds;
+            if (Statics.RANDOM.Next(50) == 1 && coinCounter > coinTimer)
+            {
+                Coins.Add(new Entities.Coin());
+                coinCounter = 0;
             }
         }
 
@@ -139,7 +189,13 @@ namespace Game1
             {
                 Ball.Draw();
             }
+            foreach (Entities.Coin Coin in Coins)
+            {
+                Coin.Draw();
+            }
             
+            Statics.SPRITEBATCH.DrawString(this.Font, "Score : " + this.score.ToString(), new Vector2(10, 10), Color.Black);
+
 
             if (gameOver)
             {

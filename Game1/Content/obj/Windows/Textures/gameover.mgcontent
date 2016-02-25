@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Users/Gabeco/Documents/Visual Studio 2015/Projects/Game1/Game1/Content/Textures/gameover.png</SourceFile>
-  <SourceTime>2016-02-12T10:13:36.5520563-05:00</SourceTime>
+  <SourceTime>2016-02-24T21:22:13.8017182-05:00</SourceTime>
   <DestFile>C:/Users/Gabeco/Documents/Visual Studio 2015/Projects/Game1/Game1/Content/bin/Windows/Textures/gameover.xnb</DestFile>
-  <DestTime>2016-02-12T10:16:25.9897476-05:00</DestTime>
+  <DestTime>2016-02-24T22:31:53.3893965-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2015-04-29T13:14:44-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

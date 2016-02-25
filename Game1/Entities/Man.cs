@@ -11,7 +11,7 @@ namespace Game1.Entities
         public Texture2D texture;
         public Vector2 position;
         public float ySpeed;
-        public bool jumpTrue = true;
+        public bool airborn = false;
         public float xSpeed = 0;       
         public int jumpTimer = 500;
         public int jumpElapsed = 0;
@@ -19,35 +19,38 @@ namespace Game1.Entities
         public Man()
         {
             ySpeed = 0;
-            this.position = new Vector2(300, 400);
+            this.position = new Vector2(475, 600);
             texture = Statics.CONTENT.Load<Texture2D>("Textures/bird1");
         }
 
         public void Update()
         {
-            if (this.position.Y >= 450)
+            if (this.position.Y >= 650 || this.position.Y < 50)
             {                
                 ySpeed = 0;
-                jumpTrue = true;
             }
             else
             {
                 ySpeed += .4f;
             }
 
-            if ((Statics.INPUT.currentState().IsKeyDown(Keys.W) || Statics.INPUT.currentState().IsKeyDown(Keys.Space)) && jumpTrue)
+            if ((Statics.INPUT.isKeyPressed(Keys.W) || Statics.INPUT.isKeyPressed(Keys.Space)))
             {
-                ySpeed = -12;
-                jumpTrue = false;
+                ySpeed = -10;
+                airborn = true;
             }
 
-            if (Statics.INPUT.currentState().IsKeyDown(Keys.D) && this.position.X < 750)
+            if (Statics.INPUT.currentState().IsKeyDown(Keys.D) && this.position.X < 950)
             {
-                xSpeed = 5;                
+                xSpeed = 6;                
             }
             if (Statics.INPUT.currentState().IsKeyDown(Keys.A) && this.position.X > 0)
             {
-                xSpeed = -5;
+                xSpeed = -6;
+            }
+            if (Statics.INPUT.currentState().IsKeyDown(Keys.D) && Statics.INPUT.currentState().IsKeyDown(Keys.A))
+            {
+                xSpeed = 0;
             }
             
 
@@ -55,9 +58,13 @@ namespace Game1.Entities
             xSpeed = 0;
 
             this.position.Y += ySpeed;
-            if (this.position.Y > 450)
+            if (this.position.Y > 650)
             {
-                this.position.Y = 450;
+                this.position.Y = 650;
+            }
+            if (this.position.Y < 50)
+            {
+                this.position.Y = 50;
             }
         }
 

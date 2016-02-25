@@ -12,36 +12,53 @@ namespace Game1.Entities
         public Vector2 position;
         public float ySpeed = 3;
         public float xSpeed = 4;
+        public int bounceCount = 0;
+        public bool destroy = false, live = false;
 
         public Ball()
         {
             texture = Statics.CONTENT.Load<Texture2D>("Textures/ball");
-            this.position = new Vector2(Statics.RANDOM.Next(750), Statics.RANDOM.Next(450));
+            this.position = new Vector2(Statics.RANDOM.Next(940), Statics.RANDOM.Next(540));
         }
 
         public void Update()
         {
-            if (this.position.X >= 750)
+            if (this.position.X >= 950)
             {
-                xSpeed = -4;
+                xSpeed = xSpeed * -1;
+                bounceCount++;
             }
             else if (this.position.X <= 0)
             {
-                xSpeed = 4;
+                xSpeed = xSpeed * -1;
+                bounceCount++;
             }
 
-            if (this.position.Y >= 400)
+            if (this.position.Y >= 600)
             {
-                ySpeed = -3;
+                ySpeed = ySpeed * -1;
+                bounceCount++;
             }
             else if (this.position.Y <= 0)
             {
-                ySpeed = 3;
+                ySpeed = ySpeed * -1;
+                bounceCount++;
+            }
+
+            if (bounceCount >= 1)
+            {
+                live = true;
+            }
+            if (bounceCount >= 20)
+            {
+                destroy = true;
             }
 
             this.position.X += xSpeed;
             this.position.Y += ySpeed;
         }
+
+        
 
         public Rectangle Bound
         {

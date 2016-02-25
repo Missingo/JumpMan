@@ -23,8 +23,10 @@ c:\users\gabeco\documents\visual studio 2015\Projects\Game1\Game1\bin\Windows\De
 c:\users\gabeco\documents\visual studio 2015\Projects\Game1\Game1\obj\x86\Debug\Game1.csprojResolveAssemblyReference.cache
 c:\users\gabeco\documents\visual studio 2015\Projects\Game1\Game1\obj\x86\Debug\Game1.exe
 c:\users\gabeco\documents\visual studio 2015\Projects\Game1\Game1\obj\x86\Debug\Game1.pdb
-c:\users\gabeco\documents\visual studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\background2x.xnb
-c:\users\gabeco\documents\visual studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\bird1.xnb
+C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Fonts\fontx.xnb
+C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\background2x.xnb
 C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\ball.xnb
+C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\bird1.xnb
+C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\coin.xnb
 C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\gameover.xnb
 C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\pixel.xnb

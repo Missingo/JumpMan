@@ -12,8 +12,8 @@ namespace Game1
     {
         private const String settingsFileName = "settings.txt";
 
-        public static int GAME_WIDTH = 800;
-        public static int GAME_HEIGHT = 500;
+        public static int GAME_WIDTH = 1000;
+        public static int GAME_HEIGHT = 700;
 
         public static String GAME_TITLE = "JumpMan";
         public static Random RANDOM = new Random();
