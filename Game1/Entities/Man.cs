@@ -19,7 +19,7 @@ namespace Game1.Entities
         public Man()
         {
             ySpeed = 0;
-            this.position = new Vector2(475, 600);
+            this.position = new Vector2(475, 650);
             texture = Statics.CONTENT.Load<Texture2D>("Textures/bird1");
         }
 

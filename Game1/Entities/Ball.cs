@@ -10,10 +10,12 @@ namespace Game1.Entities
     {
         public Texture2D texture;
         public Vector2 position;
+        public Vector3 pos;
         public float ySpeed = 3;
         public float xSpeed = 4;
         public int bounceCount = 0;
-        public bool destroy = false, live = false;
+        public bool live = false;
+        public double liveCounter = 0;
 
         public Ball()
         {
@@ -45,21 +47,26 @@ namespace Game1.Entities
                 bounceCount++;
             }
 
-            if (bounceCount >= 1)
+            if (liveCounter < 1000)
+            {
+                liveCounter += Statics.GAMETIME.ElapsedGameTime.TotalMilliseconds;
+            }
+            else if (!live)
             {
                 live = true;
-            }
-            if (bounceCount >= 20)
-            {
-                destroy = true;
             }
 
             this.position.X += xSpeed;
             this.position.Y += ySpeed;
         }
-
-        
-
+       
+        public BoundingSphere Bound2
+        {
+            get
+            {
+                return new BoundingSphere(new Vector3(this.position.X+25, this.position.Y+25, 0), 25);
+            }
+        }
         public Rectangle Bound
         {
             get

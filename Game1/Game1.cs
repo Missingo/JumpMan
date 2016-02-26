@@ -17,8 +17,9 @@ namespace Game1
         public List<Entities.Coin> Coins;
         public Texture2D background;
         public Texture2D gameover;
+        public Texture2D startScreen;
         public SpriteFont Font;
-        public bool gameOver = false;
+        public bool gameOver = false, started = false;
         public double ballCounter = 3000, coinCounter = 0;
         public int ballTimer = 3000, coinTimer = 1000;
         public int score = 0;
@@ -63,6 +64,7 @@ namespace Game1
             Statics.SPRITEBATCH = spriteBatch;
             background = Statics.CONTENT.Load<Texture2D>("Textures/background2x");
             gameover = Statics.CONTENT.Load<Texture2D>("Textures/gameover");
+            startScreen = Statics.CONTENT.Load<Texture2D>("Textures/startscreen");
             Font = Statics.CONTENT.Load<SpriteFont>("Fonts/fontx");
             Statics.PIXEL = Content.Load<Texture2D>("Textures/pixel");
 
@@ -91,10 +93,10 @@ namespace Game1
         {
             Statics.GAMETIME = gameTime;
             Statics.INPUT.Update();
+           
 
-
-            
-            if (!gameOver)
+            //Handles Updating for all moving elements. Adds balls and coins
+            if (!gameOver && started)
             {                
                 foreach (Entities.Ball Ball in Balls)
                 {
@@ -112,7 +114,17 @@ namespace Game1
                     coinCreator();
                 }
             }
-            
+
+            //Starting game
+            if (!started)
+            {
+                if (Statics.INPUT.isKeyPressed(Keys.Space))
+                {
+                    started = true;
+                }
+            }
+
+            //Checks if a Ball is hit
             foreach (Entities.Ball Ball in Balls)
             {
                 if (Man.Bound.Intersects(Ball.Bound) && Ball.live)
@@ -121,6 +133,7 @@ namespace Game1
                 }               
             }
 
+            //Checks if a coin is collected or hits the ground
             for (int i = Coins.Count-1; i >= 0; i--)
             {
                 if (Man.Bound.Intersects(Coins[i].Bound))
@@ -134,21 +147,19 @@ namespace Game1
                 }
             }
 
-           if (Man.position.Y >= 650 && Man.airborn)
+            //checks for a game over by hitting the ground
+            if (Man.position.Y >= 650 && Man.airborn)
             {
                 gameOver = true;
             }            
 
-            if (Statics.INPUT.isKeyPressed(Keys.R))
+            //Reset game
+            if (Statics.INPUT.isKeyPressed(Keys.R) && gameOver)
             {
                 gameOver = false;
                 Reset();
             }
-            
-            
-
-
-            
+                       
 
             base.Update(gameTime);
         }
@@ -196,7 +207,11 @@ namespace Game1
             
             Statics.SPRITEBATCH.DrawString(this.Font, "Score : " + this.score.ToString(), new Vector2(10, 10), Color.Black);
 
-
+            if (!started)
+            {
+                Statics.SPRITEBATCH.Draw(Statics.PIXEL, new Rectangle(0, 0, Statics.GAME_WIDTH, Statics.GAME_HEIGHT), new Color((int)0 , 0, 20, 5));
+                Statics.SPRITEBATCH.Draw(this.startScreen, new Vector2(0, 0), Color.White);
+            }
             if (gameOver)
             {
                 Statics.SPRITEBATCH.Draw(Statics.PIXEL, new Rectangle(0, 0, Statics.GAME_WIDTH, Statics.GAME_HEIGHT), new Color(1f, 0f, 0f, 0.3f));
