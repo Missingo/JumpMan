@@ -8,18 +8,18 @@ namespace Game1.Entities
 {
     public class Ball
     {
-        public Texture2D texture;
+        public Texture2D texture, texture2;
         public Vector2 position;
         public Vector3 pos;
         public float ySpeed = 3;
         public float xSpeed = 4;
-        public int bounceCount = 0;
-        public bool live = false;
+        public bool live = false, tex2 = true;
         public double liveCounter = 0;
 
         public Ball()
         {
             texture = Statics.CONTENT.Load<Texture2D>("Textures/ball");
+            texture2 = Statics.CONTENT.Load<Texture2D>("Textures/ball2");
             this.position = new Vector2(Statics.RANDOM.Next(940), Statics.RANDOM.Next(540));
         }
 
@@ -28,24 +28,22 @@ namespace Game1.Entities
             if (this.position.X >= 950)
             {
                 xSpeed = xSpeed * -1;
-                bounceCount++;
+                tex2 = false;
             }
             else if (this.position.X <= 0)
             {
                 xSpeed = xSpeed * -1;
-                bounceCount++;
+                tex2 = true;
             }
 
             if (this.position.Y >= 600)
             {
                 ySpeed = ySpeed * -1;
-                bounceCount++;
             }
             else if (this.position.Y <= 0)
             {
                 ySpeed = ySpeed * -1;
-                bounceCount++;
-            }
+            } 
 
             if (liveCounter < 1000)
             {
@@ -78,7 +76,10 @@ namespace Game1.Entities
 
         public void Draw()
         {
-            Statics.SPRITEBATCH.Draw(texture, position, Color.White);
+            if (!tex2)
+                Statics.SPRITEBATCH.Draw(texture, position, Color.White);
+            else if (tex2)
+                Statics.SPRITEBATCH.Draw(texture2, position, Color.White);
         }
 
 

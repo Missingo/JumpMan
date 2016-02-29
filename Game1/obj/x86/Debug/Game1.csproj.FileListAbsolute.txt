@@ -31,3 +31,4 @@ C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\De
 C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\gameover.xnb
 C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\pixel.xnb
 C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\startscreen.xnb
+C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\ball2.xnb

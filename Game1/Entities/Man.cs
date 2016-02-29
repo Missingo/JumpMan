@@ -25,13 +25,19 @@ namespace Game1.Entities
 
         public void Update()
         {
-            if (this.position.Y >= 650 || this.position.Y < 50)
+            //Rests character on the floor, or adds falling speed if airborne
+            if (this.position.Y >= 650 && airborn)
             {                
-                ySpeed = 0;
+                ySpeed = -50;
             }
             else
             {
                 ySpeed += .4f;
+            }
+
+            if (this.position.Y <= 50)
+            {
+                ySpeed = .01f;
             }
 
             if ((Statics.INPUT.isKeyPressed(Keys.W) || Statics.INPUT.isKeyPressed(Keys.Space)))
