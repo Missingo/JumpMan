@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Gabeco/Documents/Visual Studio 2015/Projects/Game1/Game1/Content/Textures/bird1.png</SourceFile>
-  <SourceTime>2016-02-12T09:50:53.9411194-05:00</SourceTime>
-  <DestFile>C:/Users/Gabeco/Documents/Visual Studio 2015/Projects/Game1/Game1/Content/bin/Windows/Textures/bird1.xnb</DestFile>
-  <DestTime>2016-02-24T22:31:53.3193964-05:00</DestTime>
+  <SourceFile>C:/Users/Gabeco/Documents/Visual Studio 2015/Projects/Game1/Game1/Content/Textures/bottombar.png</SourceFile>
+  <SourceTime>2016-03-02T11:49:20.8606384-05:00</SourceTime>
+  <DestFile>C:/Users/Gabeco/Documents/Visual Studio 2015/Projects/Game1/Game1/Content/bin/Windows/Textures/bottombar.xnb</DestFile>
+  <DestTime>2016-03-02T11:49:50.2703206-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2015-04-29T13:14:44-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -26,9 +26,12 @@ c:\users\gabeco\documents\visual studio 2015\Projects\Game1\Game1\obj\x86\Debug\
 C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Fonts\fontx.xnb
 C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\background2x.xnb
 C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\ball.xnb
-C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\bird1.xnb
 C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\coin.xnb
 C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\gameover.xnb
 C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\pixel.xnb
 C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\startscreen.xnb
 C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\ball2.xnb
+C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\Man.xnb
+C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\bottombar.xnb
+C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\ManPowerUp.xnb
+C:\Users\Gabeco\Documents\Visual Studio 2015\Projects\Game1\Game1\bin\Windows\Debug\Content\Textures\powerup.xnb

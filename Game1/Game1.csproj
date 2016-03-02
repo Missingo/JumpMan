@@ -41,6 +41,7 @@
     <Compile Include="Entities\Ball.cs" />
     <Compile Include="Entities\Coin.cs" />
     <Compile Include="Entities\Man.cs" />
+    <Compile Include="Entities\Powerup.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Managers\InputManager.cs" />
     <Compile Include="Managers\KBInput.cs" />

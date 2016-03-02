@@ -11,8 +11,8 @@ namespace Game1.Entities
         public Texture2D texture, texture2;
         public Vector2 position;
         public Vector3 pos;
-        public float ySpeed = 3;
-        public float xSpeed = 4;
+        public float ySpeed = Statics.RANDOM.Next(3)+2;
+        public float xSpeed = Statics.RANDOM.Next(3)+3;
         public bool live = false, tex2 = true;
         public double liveCounter = 0;
 
@@ -25,6 +25,7 @@ namespace Game1.Entities
 
         public void Update()
         {
+            //Bounces off L&R walls
             if (this.position.X >= 950)
             {
                 xSpeed = xSpeed * -1;
@@ -36,6 +37,7 @@ namespace Game1.Entities
                 tex2 = true;
             }
 
+            //Bounces off floor and ceiling
             if (this.position.Y >= 600)
             {
                 ySpeed = ySpeed * -1;
@@ -45,6 +47,8 @@ namespace Game1.Entities
                 ySpeed = ySpeed * -1;
             } 
 
+            //Makes the ball go "live" after a second. Collisions with player will not occur in this first second
+            //to avoid deaths from spawning directly on top of or next to the player
             if (liveCounter < 1000)
             {
                 liveCounter += Statics.GAMETIME.ElapsedGameTime.TotalMilliseconds;
@@ -54,17 +58,12 @@ namespace Game1.Entities
                 live = true;
             }
 
+            //Inputs movements
             this.position.X += xSpeed;
             this.position.Y += ySpeed;
         }
        
-        public BoundingSphere Bound2
-        {
-            get
-            {
-                return new BoundingSphere(new Vector3(this.position.X+25, this.position.Y+25, 0), 25);
-            }
-        }
+        
         public Rectangle Bound
         {
             get

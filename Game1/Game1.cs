@@ -15,13 +15,14 @@ namespace Game1
         public Entities.Man Man;
         public List<Entities.Ball> Balls;
         public List<Entities.Coin> Coins;
-        public Texture2D background;
+        public Entities.Powerup powerUp;
+        public Texture2D background, bottomBar;
         public Texture2D gameover;
         public Texture2D startScreen;
         public SpriteFont Font;
         public bool gameOver = false, started = false;
-        public double ballCounter = 3000, coinCounter = 0;
-        public int ballTimer = 3000, coinTimer = 1000;
+        public double ballCounter = 3000, coinCounter = 0, powerUpCounter = 0;
+        public int ballTimer = 3000, coinTimer = 1000, powerUpTimer = 20000;
         public int score = 0;
 
 
@@ -35,50 +36,43 @@ namespace Game1
             Statics.GRAPHICSDEVICE = GraphicsDevice;
             Statics.INPUT = input;
             
-
             this.graphics.PreferredBackBufferHeight = Statics.GAME_HEIGHT;
             this.graphics.PreferredBackBufferWidth = Statics.GAME_WIDTH;
             this.Window.Title = Statics.GAME_TITLE;
             this.graphics.ApplyChanges();
 
         }
-
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
+        
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
         }
-
         
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
+            // Loading textures
             spriteBatch = new SpriteBatch(GraphicsDevice);           
             Statics.SPRITEBATCH = spriteBatch;
             background = Statics.CONTENT.Load<Texture2D>("Textures/background2x");
+            bottomBar = Statics.CONTENT.Load<Texture2D>("Textures/bottombar");
             gameover = Statics.CONTENT.Load<Texture2D>("Textures/gameover");
             startScreen = Statics.CONTENT.Load<Texture2D>("Textures/startscreen");
             Font = Statics.CONTENT.Load<SpriteFont>("Fonts/fontx");
             Statics.PIXEL = Content.Load<Texture2D>("Textures/pixel");
 
-            Reset();
-
-            // TODO: use this.Content to load your game content here
+            Reset();            
         }
+
         public void Reset()
         {
+            //Initializes all entities, resets timers
             Man = new Entities.Man();
             Balls = new List<Entities.Ball>();
             Coins = new List<Entities.Coin>();
+            powerUp = new Entities.Powerup();
             ballCounter = 3000;
             coinCounter = 0;
+            powerUpCounter = 0;
             score = 0;        
         }
 
@@ -95,7 +89,7 @@ namespace Game1
             Statics.INPUT.Update();
            
 
-            //Handles Updating for all moving elements. Adds balls and coins
+            //Handles Updating for all moving elements. Adds balls, coins and power ups
             if (!gameOver && started)
             {                
                 foreach (Entities.Ball Ball in Balls)
@@ -107,11 +101,13 @@ namespace Game1
                     Coin.Update();
                 }
                 Man.Update();
+                powerUp.Update();
                 if (Man.airborn)
                 {
                     if (Balls.Count <= 10)
                         ballCreator();
                     coinCreator();
+                    powerUpCreator();
                 }
             }
 
@@ -125,12 +121,16 @@ namespace Game1
             }
 
             //Checks if a Ball is hit
-            foreach (Entities.Ball Ball in Balls)
+            for (int i = Balls.Count-1; i >= 0; i--)
             {
-                if (Man.Bound.Intersects(Ball.Bound) && Ball.live)
+                if (Man.Bound.Intersects(Balls[i].Bound) && Balls[i].live && !Man.poweredUp)
                 {
                     gameOver = true;
-                }               
+                }     
+                else if (Man.Bound.Intersects(Balls[i].Bound) && Man.poweredUp)
+                {
+                    Balls.RemoveAt(i);
+                }          
             }
 
             //Checks if a coin is collected or hits the ground
@@ -147,11 +147,29 @@ namespace Game1
                 }
             }
 
+            //Checks if a power up is collected or hits the ground
+            if (Man.Bound.Intersects(powerUp.Bound))
+            {
+                Man.poweredUp = true;
+                powerUp.Reset();
+            }
+            else if (powerUp.position.Y >= 600)
+            {
+                powerUp.Reset();
+            }
+           
+
             //checks for a game over by hitting the ground
-            if (Man.position.Y >= 650 && Man.airborn)
+            if (Man.position.Y >= 650 && Man.airborn && !Man.poweredUp)
             {
                 gameOver = true;
-            }            
+            }                  
+            
+            //Makes character fly off screen after game ends
+            if (gameOver)
+            {
+                Man.Fly();
+            }    
 
             //Reset game
             if (Statics.INPUT.isKeyPressed(Keys.R) && gameOver)
@@ -166,8 +184,8 @@ namespace Game1
 
         public void ballCreator()
         {
+            //Creates a ball every ballTimer milliseconds
             ballCounter += Statics.GAMETIME.ElapsedGameTime.TotalMilliseconds;
-
             if (ballCounter > ballTimer)
             {
                 Balls.Add(new Entities.Ball());
@@ -177,11 +195,23 @@ namespace Game1
 
         public void coinCreator()
         {
+            // 1/50 chance to create a coin at least coinTimer milliseconds after the last one was created
             coinCounter += Statics.GAMETIME.ElapsedGameTime.TotalMilliseconds;
             if (Statics.RANDOM.Next(50) == 1 && coinCounter > coinTimer)
             {
                 Coins.Add(new Entities.Coin());
                 coinCounter = 0;
+            }
+        }
+
+        public void powerUpCreator()
+        {
+            // 1/50 chance to spawn the power up at least powerUpTimer milliseconds after the last one was grabbed or hit the floor
+            powerUpCounter += Statics.GAMETIME.ElapsedGameTime.TotalMilliseconds;
+            if (powerUpCounter > powerUpTimer && Statics.RANDOM.Next(50) == 1)
+            {
+                powerUp.Go();
+                powerUpCounter = 0;
             }
         }
 
@@ -192,10 +222,11 @@ namespace Game1
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             
-
             Statics.SPRITEBATCH.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, null, null);
             Statics.SPRITEBATCH.Draw(this.background, Vector2.Zero, Color.White);
+
             Man.Draw();
+            powerUp.Draw();
             foreach (Entities.Ball Ball in Balls)
             {
                 Ball.Draw();
@@ -204,6 +235,7 @@ namespace Game1
             {
                 Coin.Draw();
             }
+            Statics.SPRITEBATCH.Draw(this.bottomBar, new Vector2(0, 650), Color.White);
             
             Statics.SPRITEBATCH.DrawString(this.Font, "Score : " + this.score.ToString(), new Vector2(10, 10), Color.Black);
 
@@ -219,9 +251,6 @@ namespace Game1
             }
 
             Statics.SPRITEBATCH.End();
-
-            // TODO: Add your drawing code here
-
             base.Draw(gameTime);
         }
     }

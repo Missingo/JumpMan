@@ -4,7 +4,6 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Gabeco/Documents/Visual Studio 2015/Projects/Game1/Game1/Content/Textures/bird1.png</File>
     <File>C:/Users/Gabeco/Documents/Visual Studio 2015/Projects/Game1/Game1/Content/Textures/ball.png</File>
     <File>C:/Users/Gabeco/Documents/Visual Studio 2015/Projects/Game1/Game1/Content/Textures/gameover.png</File>
     <File>C:/Users/Gabeco/Documents/Visual Studio 2015/Projects/Game1/Game1/Content/Textures/pixel.png</File>
@@ -13,5 +12,9 @@
     <File>C:/Users/Gabeco/Documents/Visual Studio 2015/Projects/Game1/Game1/Content/Fonts/fontx.spritefont</File>
     <File>C:/Users/Gabeco/Documents/Visual Studio 2015/Projects/Game1/Game1/Content/Textures/startscreen.png</File>
     <File>C:/Users/Gabeco/Documents/Visual Studio 2015/Projects/Game1/Game1/Content/Textures/ball2.png</File>
+    <File>C:/Users/Gabeco/Documents/Visual Studio 2015/Projects/Game1/Game1/Content/Textures/Man.png</File>
+    <File>C:/Users/Gabeco/Documents/Visual Studio 2015/Projects/Game1/Game1/Content/Textures/bottombar.png</File>
+    <File>C:/Users/Gabeco/Documents/Visual Studio 2015/Projects/Game1/Game1/Content/Textures/powerup.png</File>
+    <File>C:/Users/Gabeco/Documents/Visual Studio 2015/Projects/Game1/Game1/Content/Textures/ManPowerUp.png</File>
   </SourceFiles>
 </SourceFileCollection>
