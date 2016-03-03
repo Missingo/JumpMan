@@ -21,8 +21,8 @@ namespace Game1
         public Texture2D startScreen;
         public SpriteFont Font;
         public bool gameOver = false, started = false;
-        public double ballCounter = 3000, coinCounter = 0, powerUpCounter = 0;
-        public int ballTimer = 3000, coinTimer = 1000, powerUpTimer = 20000;
+        public double ballCounter = 5000, coinCounter = 0, powerUpCounter = 0;
+        public int ballTimer = 7000, coinTimer = 1000, powerUpTimer = 20000;
         public int score = 0;
 
 
@@ -70,7 +70,7 @@ namespace Game1
             Balls = new List<Entities.Ball>();
             Coins = new List<Entities.Coin>();
             powerUp = new Entities.Powerup();
-            ballCounter = 3000;
+            ballCounter = 5000;
             coinCounter = 0;
             powerUpCounter = 0;
             score = 0;        
